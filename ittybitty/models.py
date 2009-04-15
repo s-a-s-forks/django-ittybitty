@@ -2,7 +2,10 @@ from django.contrib.sites.models import Site
 from django.db import models
 from ittybitty.utils import gen_shortcut
 
-SITE = Site.objects.get_current()
+try:
+    SITE = Site.objects.get_current()
+except:
+    SITE = None
 
 class IttyBittyURL(models.Model):
     """
