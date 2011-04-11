@@ -2,10 +2,6 @@ from django.contrib.sites.models import Site
 from django.db import models
 from ittybitty.utils import gen_shortcut
 
-try:
-    SITE = Site.objects.get_current()
-except:
-    SITE = None
 
 class IttyBittyURL(models.Model):
     """
@@ -22,7 +18,7 @@ class IttyBittyURL(models.Model):
         return self.url
 
     def get_shortcut(self):
-        return 'http://%s/%s' % (SITE.domain, self.shortcut)
+        return 'http://%s/%s' % (Site.objects.get_current().domain, self.shortcut)
 
     class Meta:
         ordering = ('-date_created', 'shortcut')
